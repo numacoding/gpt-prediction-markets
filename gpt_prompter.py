@@ -35,11 +35,6 @@ def get_prediction_markets(linklist, model="gpt-3.5-turbo"):
         specify a high-level description of how the market will work. 2) The resolution criteria, which specify \
         how exactly the market will resolve. \
 
-        Checklist \
-
-        - Is the purpose of each token described clearly? \
-        - When referring to the outcome tokens, use their ticker in case of categorical markets \
-        (YES, NO, TEAMA, etc.) or LONG, SHORT for scalar markets. \
 
         ```{linklist}```
     '''
