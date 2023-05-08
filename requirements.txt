@@ -1,3 +1,9 @@
 pandas
 pytrends
 deep_translator
+#googlesearch-python
+GoogleNews
+beautifulsoup4
+urllib3 <=1.26.15
+openai
+dotenv

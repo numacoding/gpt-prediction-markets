@@ -5,12 +5,15 @@ from deep_translator import GoogleTranslator
 
 class TrendCapturer:
     pytrend = TrendReq()
-    def __init__(self, countries):
+    def __init__(self, countries=None):
         '''
         countries       list
-                        a list of countries. They should be written in lowercase
+                        a list of countries.
         '''
-        self.countries = countries
+        if countries != None:
+            self.countries = [x.lower() for x in countries]
+        else:
+            self.countries = ['united_states']
 
     def translate_string(self, text, target = 'en', source='auto'):
         translated = GoogleTranslator(source = source, target = target).translate(text)
@@ -21,7 +24,7 @@ class TrendCapturer:
         for country in self.countries:
             df = TrendCapturer.pytrend.trending_searches(pn=country.lower())
             df['country'] = country
-            searches = searches.append(df)
+            searches = pd.concat([searches, df], ignore_index=True)
 
         searches.reset_index(inplace=True)
         searches.columns = ['old_index', 'searches', 'country']        
