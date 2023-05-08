@@ -37,20 +37,6 @@ def get_prediction_markets(linklist, model="gpt-3.5-turbo"):
 
         Checklist \
 
-        - Is the title of the description capitalized properly? \
-        - Is the description spell-checked (American English)? \
-        - Is there an introductory paragraph which helps contextualize the market? \
-        - The question must be clearly stated in the market description, at least in the form of \
-        clear resolution criteria. It is not enough to state the question in the title of the market. \
-        - Are all links pointing to the correct websites? \
-        - Are all dates specified in one of the following formats: 1) YYYY-MM-DDTHH:MM. For example, \
-        2023-04-12T15:30:00 represents April 12, 2023 at 15:30 UTC. \
-        - Prefer UTC as timezone. \
-        - If possible, is an API query provided (e.g. when betting on market prices)? When querying asset \
-        prices, prefer CoinGecko for crypto (note that CoinGecko only has one data point per day - at 00:00), \
-        unless you need specific pairs (like ZTG/DAI on HydraDX). Prefer AlphaVantage for everything else. \
-        Provide Python code if necessary. Prefer round values: Instead of querying price at 23:59, query \
-        00:00 the next day.
         - Is the purpose of each token described clearly? \
         - When referring to the outcome tokens, use their ticker in case of categorical markets \
         (YES, NO, TEAMA, etc.) or LONG, SHORT for scalar markets. \
