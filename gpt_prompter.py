@@ -3,7 +3,8 @@ import os
 from dotenv import load_dotenv, find_dotenv
 _ = load_dotenv(find_dotenv())
 
-openai.api_key  = os.getenv('OPENAI_API_KEY')
+# openai.api_key  = os.getenv('OPENAI_API_KEY')
+openai.api_key = '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'
 
 def get_prediction_markets(linklist, model="gpt-3.5-turbo"):
     prompt = f'''

@@ -6,4 +6,4 @@ GoogleNews
 beautifulsoup4
 urllib3 <=1.26.15
 openai
-dotenv
+python-dotenv
