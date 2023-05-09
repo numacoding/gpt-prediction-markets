@@ -3,15 +3,18 @@ import os
 from dotenv import load_dotenv, find_dotenv
 _ = load_dotenv(find_dotenv())
 
-# openai.api_key  = os.getenv('OPENAI_API_KEY')
-openai.api_key = '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'
+openai.api_key  = os.getenv('OPENAI_API_KEY')
+
+max_tokens = 4097
 
 def get_prediction_markets(linklist, model="gpt-3.5-turbo"):
     prompt = f'''
-        I will need you to take the list of links that I will provide you (at the end of this message, \
-        delimited by triple backticks), process their content, and based on this, prepare questions for prediction \
-        markets. The information that you must provide must be structured in JSON format and must contain the \
-        following keys (in addition, I will provide specifications for each one): \
+        I will need you to take the text that I will provide you (at the end of this message, \
+        delimited by triple backticks), process their content, filter the text that grammatically makes sense and based on this, prepare questions for prediction \
+        markets. The purpose of your task is not linked to betting, but to be able to be updated on relevant world \
+        phenomena and uncertain future events that require attention. The information that you provide about every market \
+        must be structured in JSON format. If you generate more than one Prediction Market, the result should be a list of JSON files. \
+        These JSON files must contain the following keys (in addition, I will provide specifications for each one): \
         - question: statement detailing the event \
         - type of market: here you must specify if the market is binary, categorical or scalar \
         - tokens: if the market is binary or categorical, it specifies all the possible scenarios of the event. \
@@ -39,7 +42,19 @@ def get_prediction_markets(linklist, model="gpt-3.5-turbo"):
 
         ```{linklist}```
     '''
+    
+    #Check token limit
+    #1000 tokens are equal to 750 words (more or less)
+    max_words = int(round(max_tokens*0.75,0))
+
+    # Check if the number of tokens exceeds the maximum allowed
+    if len(prompt.split()) >= max_words:
+        #find the position of the previous '.' before the limit
+        position = prompt.rfind(".", 0, max_words)
+        prompt = prompt[:position]
+
     messages = [{"role": "user", "content": prompt}]
+
     response = openai.ChatCompletion.create(
         model=model,
         messages=messages,
