@@ -9,11 +9,11 @@ trendcapt = TrendCapturer()
 raw_trends = trendcapt.main_searches()
 
 list_of_trends = list(raw_trends['searches'])
-print(list_of_trends[0])
 
 trend_dict = {}
-for trend in list_of_trends[:1]:
-    news_links = get_news_links(list_of_trends[0])
+for trend in list_of_trends[3:5]:
+    print(trend)
+    news_links = get_news_links(trend)
     text = get_text_from_news(news_links)
     prediction_markets = get_prediction_markets(text)
     trend_dict[trend] = prediction_markets

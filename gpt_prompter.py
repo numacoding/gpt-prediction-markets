@@ -39,6 +39,7 @@ def get_prediction_markets(linklist, model="gpt-3.5-turbo"):
         specify a high-level description of how the market will work. 2) The resolution criteria, which specify \
         how exactly the market will resolve. \
 
+        IMPORTANT: avoid including these characters in the JSON file: '\' and '\n'  \
 
         ```{linklist}```
     '''
