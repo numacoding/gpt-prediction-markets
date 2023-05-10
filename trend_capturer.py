@@ -22,7 +22,7 @@ class TrendCapturer:
     def main_searches(self, target = 'en', source = 'auto'):
         searches = pd.DataFrame([])
         for country in self.countries:
-            df = TrendCapturer.pytrend.trending_searches(pn=country.lower())
+            df = TrendCapturer.pytrend.trending_searches(pn=country)
             df['country'] = country
             searches = pd.concat([searches, df], ignore_index=True)
 

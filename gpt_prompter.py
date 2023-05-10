@@ -11,33 +11,20 @@ def get_prediction_markets(linklist, model="gpt-3.5-turbo"):
     prompt = f'''
         I will need you to take the text that I will provide you (at the end of this message, \
         delimited by triple backticks), process their content, filter the text that grammatically makes sense and based on this, prepare questions for prediction \
-        markets. The purpose of your task is not linked to betting, but to be able to be updated on relevant world \
-        phenomena and uncertain future events that require attention. The information that you provide about every market \
+        markets. The information that you provide about every market \
         must be structured in JSON format. If you generate more than one Prediction Market, the result should be a list of JSON files. \
         These JSON files must contain the following keys (in addition, I will provide specifications for each one): \
         - question: statement detailing the event \
-        - type of market: here you must specify if the market is binary, categorical or scalar \
+        - type of market: specify if the market is binary, categorical or scalar \
         - tokens: if the market is binary or categorical, it specifies all the possible scenarios of the event. \
         If it is scalar, it provides a minimum and maximum value according to the news in question \
         - End Date: this date must be prior to the occurrence of the event, specified in YYYY-MM-DDTHH:MM format \
-        in UTC time (for example, if an event occurs on April 12, 2023 at 3:30 p.m. in UTC time). UTC, the closing \
+        in UTC time (for example, if an event occurs on April 12, 2023 at 3:30 p.m. in UTC time, the closing \
         date must be before 2023-04-12T15:30:00) \
         - Note: a brief description of the market should go here, giving context of the event covered, the meaning \
         of each of the tokens (possible outcomes), and a data source that can be used to find this information. \
         Ideally, this source should be a publicly accessible database, API, or Python code. \
-        
-        Market Creation Best Practices and Checklist \
-
-        All markets should observe our rules described here: https://docs.zeitgeist.pm/docs/learn/market-rules. \
-        The title of the market should either be a statement ("Musk steps down as CEO of Twitter before the end \
-        of 2023 (UTC)"), an object ("US Dollar Currency Index at the end of 2023 (UTC)") or a question ("Will \
-        Putin remain in power until the end of 2023 (UTC)?"). Prefer statements over questions, except if the \
-        topic of the market is controversial. \
-
-        Market Descriptions are usually split into two parts: 1) A general description which clarifies what \
-        the market is about and what the recent developments in the matter were. The description will usually \
-        specify a high-level description of how the market will work. 2) The resolution criteria, which specify \
-        how exactly the market will resolve. \
+        Check our rules here: https://docs.zeitgeist.pm/docs/learn/market-rules \
 
         IMPORTANT: avoid including these characters in the JSON file: '\' and '\n'  \
 

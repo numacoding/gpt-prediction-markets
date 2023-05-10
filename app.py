@@ -11,7 +11,7 @@ raw_trends = trendcapt.main_searches()
 list_of_trends = list(raw_trends['searches'])
 
 trend_dict = {}
-for trend in list_of_trends[3:5]:
+for trend in list_of_trends[:5]:
     print(trend)
     news_links = get_news_links(trend)
     text = get_text_from_news(news_links)
