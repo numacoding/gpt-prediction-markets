@@ -7,3 +7,4 @@ beautifulsoup4
 urllib3 <=1.26.15
 openai
 python-dotenv
+streamlit

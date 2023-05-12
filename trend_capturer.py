@@ -48,7 +48,7 @@ class TrendCapturer:
             except:
                 temp = pd.DataFrame(main_searches_df.iloc[row, :]).T
                 temp.columns = ['title', 'country']
-            main_searches_suggestions = main_searches_suggestions.append(temp)
+            main_searches_suggestions = pd.concat([main_searches_suggestions, temp], ignore_index=True)
 
         return main_searches_suggestions
 
