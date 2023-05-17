@@ -16,7 +16,7 @@ class NotionConnection:
     def get_pms(self):
         url = f'https://api.notion.com/v1/databases/{self.database_id}/query'
         payload = {'page_size': 100}
-        r = requests.post(url, json=payload, headers = NotionConnect.HEADERS)
+        r = requests.post(url, json=payload, headers = NotionConnection.HEADERS)
 
         result_dict = r.json()
 
@@ -31,7 +31,7 @@ class NotionConnection:
         create_url = 'https://api.notion.com/v1/pages'
         payload= {'parent': {'database_id': self.database_id}, 'properties': data}
 
-        r = requests.post(create_url, headers= NotionConnect.HEADERS, json= payload)
+        r = requests.post(create_url, headers= NotionConnection.HEADERS, json= payload)
         print(r.status_code)
 
         return r
@@ -40,7 +40,7 @@ class NotionConnection:
         url= f'https://api.notion.com/v1/pages/{page_id}'
         payload= {'properties': data}
 
-        r = requests.patch(url, json=payload, headers=NotionConnect.HEADERS)
+        r = requests.patch(url, json=payload, headers=NotionConnection.HEADERS)
         print(r.status_code)
         return r
 
@@ -49,6 +49,6 @@ class NotionConnection:
 
         payload= {'archived': True}
 
-        r = requests.patch(url, json=payload, headers=NotionConnect.HEADERS)
+        r = requests.patch(url, json=payload, headers=NotionConnection.HEADERS)
         print(r.status_code)
         return r
