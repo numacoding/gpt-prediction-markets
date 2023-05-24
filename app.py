@@ -40,9 +40,20 @@ if trigger:
         operation_percentage = 1/len(trends)
         percentage += operation_percentage
         my_bar.progress(percentage, text=progress_text)
+        # if len(prediction_markets)>1:
+        #     for pm in prediction_markets:
+        #         st.checkbox(str(pm))
+        # else:
+        #     st.checkbox(str(prediction_markets))
+
+    
 
     st.write (trend_dict)
 
     save_file = open('prediction-markets.json', 'w')
     json.dump(trend_dict, save_file)
     save_file.close()
+
+    # for pm in trend_dict:
+    #     if json.dumps(pm):
+    #         st.checkbox(pm)
