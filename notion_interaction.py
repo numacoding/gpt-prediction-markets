@@ -1,16 +1,28 @@
 import os
 from notion_connection import NotionConnection
 import json
+from datetime import datetime, timezone
 
 #notion auth
 NOTION_TOKEN = os.getenv('NOTION_TOKEN')
 DATABASE_ID = os.getenv('DATABASE_ID')
-headers = {
-    "Authorization": "Bearer " + NOTION_TOKEN,
-    "Content-Type": "application/json",
-    "Notion-Version": "2022-06-28",
+
+
+notion_database = NotionConnection(NOTION_TOKEN, DATABASE_ID)
+
+# print(json.dumps(notion_database.get_page(), indent=4))
+
+title = "Test Title"
+description = "Test Description"
+published_date = datetime.now().astimezone(timezone.utc).isoformat()
+data = {
+    "URL": {"title": [{"text": {"content": description}}]},
+    "Title": {"rich_text": [{"text": {"content": title}}]},
+    "Published": {"date": {"start": published_date, "end": None}}
 }
 
-notion_database = NotionConnection(headers, DATABASE_ID)
+bloque = 'Testing paragraph'
 
-print(json.dumps(notion_database.get_pms(), indent=4))
+print(notion_database.get_page())
+
+notion_database.create_page(data, bloque)

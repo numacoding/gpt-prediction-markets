@@ -2,13 +2,17 @@ import json
 import requests
 
 class NotionConnection:
-    
-    def __init__(self, headers, database_id: str):
+
+    def __init__(self, sec_token, database_id: str):
         self.database_id = database_id
-        self.headers = headers
+        self.headers = {
+            "Authorization": "Bearer " + sec_token,
+            "Content-Type": "application/json",
+            "Notion-Version": "2022-06-28",
+        }
 
 
-    def get_pms(self):
+    def get_page(self):
         url = f'https://api.notion.com/v1/databases/{self.database_id}/query'
         payload = {'page_size': 100}
         r = requests.post(url, json=payload, headers = self.headers)
@@ -22,16 +26,38 @@ class NotionConnection:
 
         return results
 
-    def create_pm(self, data: dict):
+    def create_page(self, data: dict, block):
         create_url = 'https://api.notion.com/v1/pages'
-        payload= {'parent': {'database_id': self.database_id}, 'properties': data}
+        payload= {'parent': 
+            {
+                'database_id': self.database_id
+            }, 
+            'properties': data, 
+            'children': [
+                {
+                    'object': 'block',
+                    'type': 'heading_2',
+                    'heading_2': {
+                        'text': [{'type': 'text', 'text': {'content': 'Prediction Market'}}]
+                    }
+                },
+                {
+                    'object': 'block',
+                    'type': 'paragraph',
+                    'paragraph': {
+                        'text': [{'type': 'text', 'text': {'content': block}}]
+                    }
+                }
+            ]
+        }
+        
 
         r = requests.post(create_url, headers= self.headers, json= payload)
         print(r.status_code)
 
         return r
 
-    def update_pms(self, page_id: str, data: dict):
+    def update_page(self, page_id: str, data: dict):
         url= f'https://api.notion.com/v1/pages/{page_id}'
         payload= {'properties': data}
 
@@ -39,7 +65,7 @@ class NotionConnection:
         print(r.status_code)
         return r
 
-    def delete_pms(self, page_id: str):
+    def delete_page(self, page_id: str):
         url= f'https://api.notion.com/v1/pages/{page_id}'
 
         payload= {'archived': True}
