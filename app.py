@@ -27,7 +27,7 @@ with col3:
 if trigger:
     trend_dict = {}
     progress_text = 'Processing the information and generating the PMs. Please wait'
-    my_bar = st.progress(0, text=progress_text)
+    # my_bar = st.progress(0, text=progress_text)
     percentage = 0
     for trend in trends:
         print(trend)
@@ -37,9 +37,9 @@ if trigger:
         if prediction_markets[0] == '[':
             prediction_markets = json.loads(prediction_markets)
         trend_dict[trend] = prediction_markets
-        operation_percentage = 1/len(trends)
-        percentage += operation_percentage
-        my_bar.progress(percentage, text=progress_text)
+        # operation_percentage = 1/len(trends)
+        # percentage += operation_percentage
+        # my_bar.progress(percentage, text=progress_text)
         # if len(prediction_markets)>1:
         #     for pm in prediction_markets:
         #         st.checkbox(str(pm))

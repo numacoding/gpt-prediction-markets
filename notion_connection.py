@@ -26,6 +26,15 @@ class NotionConnection:
 
         return results
 
+    # def create_page(self, data: dict):
+    #     create_url = "https://api.notion.com/v1/pages"
+
+    #     payload = {"parent": {"database_id": self.database_id}, "properties": data}
+
+    #     res = requests.post(create_url, headers=self.headers, json=payload)
+    #     # print(res.status_code)
+    #     return res
+
     def create_page(self, data: dict, block):
         create_url = 'https://api.notion.com/v1/pages'
         payload= {'parent': 
@@ -56,6 +65,33 @@ class NotionConnection:
         print(r.status_code)
 
         return r
+
+    def add_block_children(self, page_id, data:dict):
+        page_id_edited = page_id.replace('-','')
+        print(page_id_edited)
+        url = f"https://api.notion.com/v1/blocks/{page_id}/children"
+        block_data = {
+            "object": "block",
+            "type": "paragraph",
+            "paragraph": {
+                "text": [
+                    {
+                        "type": "text",
+                        "text": {
+                            "content": data
+                        }
+                    }
+                ]
+            }
+        }
+
+        r = requests.patch(url, headers=self.headers, json=block_data)
+
+        if r.status_code == 200:
+            print("Block added")
+        else:
+            print("Error:", r.status_code, r.text)
+
 
     def update_page(self, page_id: str, data: dict):
         url= f'https://api.notion.com/v1/pages/{page_id}'

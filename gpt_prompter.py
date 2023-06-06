@@ -1,6 +1,7 @@
 import openai
 import os
 from dotenv import load_dotenv, find_dotenv
+from datetime import datetime, timedelta
 _ = load_dotenv(find_dotenv())
 
 openai.api_key  = os.getenv('OPENAI_API_KEY')
@@ -8,6 +9,10 @@ openai.api_key  = os.getenv('OPENAI_API_KEY')
 max_tokens = 4097
 
 def get_prediction_markets(linklist, model="gpt-3.5-turbo"):
+
+    end_date = str(datetime.now() + timedelta(days=2))
+    print(end_date)
+
     prompt = f'''
         I will need you to take the text that I will provide you (at the end of this message, \
         delimited by triple backticks), process their content, filter the text that grammatically makes sense and based on this, prepare questions for prediction \
@@ -26,7 +31,7 @@ def get_prediction_markets(linklist, model="gpt-3.5-turbo"):
         Ideally, this source should be a publicly accessible database, API, or Python code. \
         Check our rules here: https://docs.zeitgeist.pm/docs/learn/market-rules \
 
-        IMPORTANT: avoid including these characters in the JSON file: '\' and '\n'  \
+        IMPORTANT: DO NOT MENTION PREDICTION MARKETS WHOSE COMPLETION DATE IS BEFORE THIS DATE: {end_date} \
 
         ```{linklist}```
     '''
