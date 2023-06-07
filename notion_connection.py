@@ -67,22 +67,24 @@ class NotionConnection:
         return r
 
     def add_block_children(self, page_id, data:dict):
-        page_id_edited = page_id.replace('-','')
-        print(page_id_edited)
+        # page_id_edited = page_id.replace('-','')
+        # print(page_id_edited)
         url = f"https://api.notion.com/v1/blocks/{page_id}/children"
         block_data = {
-            "object": "block",
-            "type": "paragraph",
-            "paragraph": {
-                "text": [
-                    {
-                        "type": "text",
-                        "text": {
-                            "content": data
+            "children": [{
+                "object": "block",
+                "type": "paragraph",
+                "paragraph": {
+                    "rich_text": [
+                        {
+                            "type": "text",
+                            "text": {
+                                "content": data
+                            }
                         }
-                    }
-                ]
-            }
+                    ]
+                }
+            }]
         }
 
         r = requests.patch(url, headers=self.headers, json=block_data)

@@ -2,15 +2,17 @@ import os
 from notion_connection import NotionConnection
 import json
 from datetime import datetime, timezone
+from dotenv import load_dotenv, find_dotenv
+
+_ = load_dotenv(find_dotenv())
 
 #notion auth
 NOTION_TOKEN = os.getenv('NOTION_TOKEN')
 DATABASE_ID = os.getenv('DATABASE_ID')
 
+notion_database = NotionConnection(NOTION_TOKEN, DATABASE_ID) # type: ignore
 
-notion_database = NotionConnection(NOTION_TOKEN, DATABASE_ID)
-
-# print(json.dumps(notion_database.get_page(), indent=4))
+# print(json.dumps(notion_database.get_page(), indent=2))
 
 # title = "Test Title1"
 # description = "Futures"
@@ -30,8 +32,6 @@ notion_database = NotionConnection(NOTION_TOKEN, DATABASE_ID)
 # }
 
 page_dict = notion_database.get_page()
-page_url = page_dict[0]['url']
-page_id = page_url.split('/')[-1]
-print(page_id)
+page_id = page_dict[0]['id']
 
-notion_database.add_block_children(page_dict[0]['id'], 'Test')
+notion_database.add_block_children(page_id, 'Test') # type: ignore

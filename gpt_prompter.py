@@ -53,5 +53,4 @@ def get_prediction_markets(linklist, model="gpt-3.5-turbo"):
         messages=messages,
         temperature=0, #degree of randomness of the model's output
     )
-    return response.choices[0].message["content"]
-
+    return response.choices[0].message["content"] # type: ignore
