@@ -1,0 +1,4 @@
+__pycache__
+.env
+prediction-markets.json
+db.json
