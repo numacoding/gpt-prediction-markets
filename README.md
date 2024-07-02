@@ -18,13 +18,18 @@ This project is designed to capture and process market trends from various sourc
 
 - **GPT Prompter** (`gpt_prompter.py`): Using natural language models (LLMs), this script creates prediction markets based on the collected trends and news, ready to be published.
 
+### Notion Integration
+
+- **Notion Connection** (`notion_connection.py`): This script connects the pipeline to the Notion space of the Zeitgeist Advisory Committee.
+- **Notion Interaction** (`notion_interaction.py`): Using this script, committee members can add any number of markets to their database.
+
 ### User Experience
 
-- **Streamlit Application** (`app.py`): A web application developed with Streamlit allows users to select prediction market proposals. These proposals can be added to the Notion space of the Zeitgeist Advisory Committee for evaluation and potential publication.
+- **Streamlit Application** (`app.py`): A web application developed with Streamlit (https://streamlit.io/) allows users to select prediction market proposals. These proposals can be added to the Notion space of the Zeitgeist Advisory Committee for evaluation and potential publication. The application is designed to be easily used by team members without programming knowledge.
 
 ## Objective
 
-The objective of this project is to provide a tool capable of dynamically creating prediction markets based on current trends. This eliminates the need for experts in each topic, facilitating efficient and accurate creation and evaluation of prediction markets.
+The objective of this project is to provide a tool capable of dynamically creating prediction markets based on current trends. This eliminates the need for experts in each topic, facilitating efficient and accurate creation and evaluation of prediction markets. The R&D of 'permissioned' prediction markets is solely the responsibility of the Advisory Committee. Given the fast pace of news, manual handling of this process represented a bottleneck and a significant workload for the Committee members. This repository aims to alleviate their burden.
 
 ## Usage
 
@@ -38,10 +43,14 @@ The objective of this project is to provide a tool capable of dynamically creati
 3. **Prediction Market Generation**:
     - Run `gpt_prompter.py` to generate prediction markets based on the collected trends and news.
 
-4. **Streamlit Application**:
+4. **Notion Integration**:
+    - Run `notion_connection.py` to connect to the Notion space of the Zeitgeist Advisory Committee.
+    - Run `notion_interaction.py` to add prediction markets to the Committee's database.
+
+5. **Streamlit Application**:
     - Run `app.py` to start the web application and select prediction market proposals.
 
-5. **Evaluation and Publication**:
+6. **Evaluation and Publication**:
     - Use the application to add proposals to the Notion space of the Zeitgeist Advisory Committee for evaluation.
 
 ## Contributions
